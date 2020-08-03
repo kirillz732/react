@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --open --config ../react/webpack.dev.conf.js",
-    "build": "webpack --config ../react/webpack.build.conf.js"
+    "dev": "webpack-dev-server --open --mode development",
+    "prod": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
