@@ -1,19 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import '../styles/style.scss';
 
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
 
-export default class Search extends React.Component {
+export default function Search() {
 
-  render() {
-
-    this.input = '';
+    const searchInput = '';
 
     function getInputValue() {
-      this.input = document.getElementById('outlined-basic')
-      return this.input;
+      searchInput = document.getElementById('outlined-basic');
+      return searchInput;
     }
 
     return (
@@ -22,7 +20,7 @@ export default class Search extends React.Component {
         <div className='title'>Fiend your movie</div>
         <div className='search'>
           <input className='search-input' id="outlined-basic" variant="outlined" />
-          <NavLink to={`/search/${this.input}`}>
+          <NavLink to={`/search/${searchInput}`}>
             <Button type='submit' variant="contained" className='search-button' color="secondary" color="secondary"
                     onClick={getInputValue}>
               Search
@@ -41,5 +39,4 @@ export default class Search extends React.Component {
       </div>
 
     )
-  }
 };

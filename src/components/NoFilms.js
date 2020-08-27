@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import '../styles/style.scss';
 
-export default class NoFilms extends Component {
-  render() {
+export default function NoFilms() {
     return (
       <div className='no-films'>
         <div className='home'>
@@ -12,5 +11,4 @@ export default class NoFilms extends Component {
         No films found
       </div>
     )
-  }
 };

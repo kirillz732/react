@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import Search from "./Search";
 import Film from "./Film";
@@ -6,9 +6,7 @@ import {BrowserRouter, Route, Switch as RouterSwitch } from "react-router-dom";
 import NoFilms from "./NoFilms";
 
 
-export default class Header extends Component {
-  render() {
-
+export default function Header() {
     return (
       <BrowserRouter>
         <div className='header'>
@@ -18,7 +16,7 @@ export default class Header extends Component {
             <Route component={NoFilms}/>
           </RouterSwitch>
           <div className='found-movies'>
-            <div className='title-found-movie'>{this.props.itemsLength} movie found</div>
+            <div className='title-found-movie'>1 movie found</div>
             <div className='sort'>
               <div className='sort-by'>
                 Sort By
@@ -34,5 +32,4 @@ export default class Header extends Component {
         </div>
       </BrowserRouter>
     )
-  }
 };
