@@ -1,35 +1,31 @@
-import React from 'react';
+import * as React from 'react';
 
+import Button from '@material-ui/core/Button';
 import Search from "./Search";
 import Film from "./Film";
 import {BrowserRouter, Route, Switch as RouterSwitch } from "react-router-dom";
 import NoFilms from "./NoFilms";
+import CreateForm from "./CreateForm/CreateForm";
+import DeleteModal from "./DeleteModal/DeleteModal";
 
 
-export default function Header() {
+const Header = () => {
     return (
       <BrowserRouter>
         <div className='header'>
+          <div className='header-title'>
+            ReactJS mentoring
+            <CreateForm open={true} isAddMovie={true} />
+            <DeleteModal/>
+          </div>
           <RouterSwitch >
-            <Route path="/" exact component={Search}/>
+            <Route path="/" component={Search}/>
             <Route path='/film/:id' component={Film}/>
             <Route component={NoFilms}/>
           </RouterSwitch>
-          <div className='found-movies'>
-            <div className='title-found-movie'>1 movie found</div>
-            <div className='sort'>
-              <div className='sort-by'>
-                Sort By
-              </div>
-              <div className="toggle">
-                <input type="radio" name="Release" value="weight" id="Release" checked="checked"/>
-                <label htmlFor="Release">Release Date</label>
-                <input type="radio" name="Rating" value="dimensions" id="Rating"/>
-                <label htmlFor="Rating">Rating</label>
-              </div>
-            </div>
-          </div>
         </div>
       </BrowserRouter>
     )
 };
+
+export default Header;

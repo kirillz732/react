@@ -1,8 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 
 import '../styles/style.scss';
+import * as PropTypes from "prop-types";
+import Movie from "./Movie";
 
-export default function Film() {
+const Film = () => {
     // this.state = { item: {
     //     "id": 0,
     //     "title": "string",
@@ -54,4 +56,13 @@ export default function Film() {
         </div>
       </div>
     );
+};
+
+export default Film;
+
+Film.propTypes = {
+  poster_path: PropTypes.string,
+  title: PropTypes.string,
+  release_date: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.string)
 };

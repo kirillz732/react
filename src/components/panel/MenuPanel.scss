@@ -1,0 +1,27 @@
+.filter {
+  margin-left: 40px;
+}
+
+.MuiButton-root {
+  color: #fff !important;
+  margin-right: 15px;
+}
+
+
+.MuiFormControl-root {
+  width: 100px;
+
+  .MuiFormLabel-root,
+  .MuiSelect-selectMenu {
+    color: #fff;
+  }
+}
+
+.MuiTypography-root{
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar {
+  width: 100%;
+}
