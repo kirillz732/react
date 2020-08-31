@@ -6,7 +6,7 @@ import '../styles/style.scss';
 const Movie = (props) => {
 
   return (
-    <div className='contant'>
+    <div className='contant' >
       <div className="poster" style={{backgroundImage: `url(${props.movieItem.poster_path})`}}></div>
       <div className='info'>
         <div className='movie-title'>
