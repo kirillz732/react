@@ -1,8 +1,8 @@
 @import './src/styles/variebles';
 
 
-#form-dialog-title, button, input,
-.MuiListItem-root.Mui-selected {
+#form-dialog-title, button, input {
+  color: $white !important;
   text-transform: uppercase;
 }
 

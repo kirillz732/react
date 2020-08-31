@@ -7,8 +7,21 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  dialogTitle: {
+    color: '#fff',
+    textDecoration: 'uppercase'
+  },
+  dialogContentText: {
+    color: '#fff'
+  }
+});
 
 const DeleteModal = () => {
+  const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -30,13 +43,23 @@ const DeleteModal = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">DELETE MOVIE
+        <DialogTitle
+          classes={{
+            root: classes.dialogTitle
+          }}
+          id="alert-dialog-title"
+        >
+          DELETE MOVIE
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText
+            classes={{
+              root: classes.dialogContentText
+            }}
+            id="alert-dialog-description">
             Are you sure you want to delete movie?
           </DialogContentText>
         </DialogContent>

@@ -11,9 +11,22 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from '@material-ui/core/Select';
 import CloseIcon from '@material-ui/icons/Close';
 import FormControl from "@material-ui/core/FormControl";
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  dialogTitle: {
+    color: '#fff',
+    textDecoration: 'uppercase'
+  },
+  textField: {
+    color: '#fff'
+  }
+});
 
 
 const CreateForm = (props) => {
+  const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const title = props.isAddMovie ? 'Add movie' : 'Edit movie';
@@ -33,7 +46,11 @@ const CreateForm = (props) => {
         {buttonName}
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">
+        <DialogTitle
+          classes={{
+            root: classes.dialogTitle
+          }}
+          id="form-dialog-title">
           {title}
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -41,6 +58,9 @@ const CreateForm = (props) => {
         </DialogTitle>
         <DialogContent>
           <TextField
+            classes={{
+              root: classes.textField
+            }}
             margin="dense"
             id="name"
             label="TITLE"
