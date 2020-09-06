@@ -4,6 +4,7 @@ import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 import {BrowserRouter} from "react-router-dom";
+import MenuPanel from "./panel/MenuPanel";
 
 export default class App extends Component {
   state = {
@@ -30,6 +31,7 @@ export default class App extends Component {
       <BrowserRouter forceRefresh={true}>
         <div>
           <Header itemsLength={this.state.items.length}/>
+          <MenuPanel/>
           <Body items={this.state.items}/>
           <Footer/>
         </div>

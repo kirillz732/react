@@ -1,0 +1,19 @@
+@import './src/styles/variebles';
+
+
+#form-dialog-title, button, input {
+  color: $white !important;
+  text-transform: uppercase;
+}
+
+label, .form-button {
+  color: $color-button !important;
+}
+
+.MuiPaper-root {
+  background: $color-background !important;
+}
+
+.select-genre {
+  width: 100%;
+}
