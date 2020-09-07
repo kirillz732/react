@@ -65,6 +65,7 @@ const CreateForm = (props) => {
             id="name"
             label="TITLE"
             fullWidth
+            disabled={!props.isAddMovie}
           />
           <TextField
             className='calendar'

@@ -83,6 +83,8 @@ body {
 }
 
 .contant {
+    position: relative;
+    cursor: pointer;
     display: inline-block;
     color: $white;
     margin: 30px 0 0 70px;
@@ -92,6 +94,14 @@ body {
     }
 }
 
+.MuiListItem-button {
+    display: block !important;
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+}
 .poster {
     width: 510px;
     height: 760px;

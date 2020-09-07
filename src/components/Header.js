@@ -6,7 +6,6 @@ import Film from "./Film";
 import {BrowserRouter, Route, Switch as RouterSwitch } from "react-router-dom";
 import NoFilms from "./NoFilms";
 import CreateForm from "./CreateForm/CreateForm";
-import DeleteModal from "./DeleteModal/DeleteModal";
 
 
 const Header = () => {
@@ -16,7 +15,6 @@ const Header = () => {
           <div className='header-title'>
             ReactJS mentoring
             <CreateForm open={true} isAddMovie={true} />
-            <DeleteModal/>
           </div>
           <RouterSwitch >
             <Route path="/" component={Search}/>
