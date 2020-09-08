@@ -112,8 +112,9 @@ body {
 .poster-small {
     width: 270px;
     height: 314px;
-    background: no-repeat;
     margin: 0 0 25px 25px;
+    background: no-repeat;
+    background-size: contain;
 }
 
 .movie-title {

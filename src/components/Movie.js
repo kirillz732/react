@@ -14,9 +14,9 @@ const Movie = (props) => {
   const [hover, setHover] = React.useState(false);
   const open = Boolean(anchorEl);
 
-  const toggle = () => setHover(true);
+  const toggle = (isHover) => setHover(isHover);
 
-  let hoverMenu = {
+  const hoverMenu = {
     display: hover ? 'block' : 'none'
   };
 
@@ -28,8 +28,14 @@ const Movie = (props) => {
     setAnchorEl(null);
   };
 
+  const setSelectedItem = (movie) => {
+    props.onItemClict(movie);
+  };
+
   return (
-    <div className='contant' onMouseOver={toggle}>
+    <div className='contant'
+         onMouseOver={() => toggle(true)}
+         onClick={() => setSelectedItem(props.movieItem)}>
       <div className='menu' style={hoverMenu}>
         <IconButton
           aria-label="more"
