@@ -6,8 +6,12 @@ import Footer from './Footer';
 import {BrowserRouter} from "react-router-dom";
 import MenuPanel from "./panel/MenuPanel";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {Provider} from "react-redux";
+import movieApp from "../redux/reducer";
+import {createStore} from "redux";
+import {setMovies} from "../redux/actions";
 
-const callToApi = () =>{
+const callToApi = () => {
   const [items, setData] = React.useState(undefined);
 
   React.useEffect(() => {
@@ -35,19 +39,26 @@ const spinnerStyle = {
   left: '50%'
 };
 
+
 const App = () => {
-   const [items] = callToApi();
-   const [movie, setMovie] = React.useState(undefined);
+  const store = createStore(movieApp);
+  const [items] = callToApi();
+  console.log(items)
+   store.dispatch(setMovies(items));
+  console.log(store.getState())
+  const [movie, setMovie] = React.useState(undefined);
 
   if (items) {
     return (
       <BrowserRouter forceRefresh={true}>
-        <div>
-          <Header itemsLength={items.length} movie={movie} />
-          <MenuPanel/>
-          <Body onMovieClick={(selectedMovie) => setMovie(selectedMovie)}  items={items}/>
-          <Footer/>
-        </div>
+        <Provider store={store}>
+          <div>
+            <Header itemsLength={items.length} movie={movie}/>
+            <MenuPanel/>
+            <Body onMovieClick={(selectedMovie) => setMovie(selectedMovie)} items={items}/>
+            <Footer/>
+          </div>
+        </Provider>
       </BrowserRouter>
     );
   } else {

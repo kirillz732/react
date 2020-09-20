@@ -1,4 +1,4 @@
-export const GET_MOVIES = 'GET_MOVIES';
+export const SET_MOVIES = 'SET_MOVIES';
 export const CREATE_MOVIE = 'CREATE_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const EDIT_MOVIE = 'EDIT_MOVIE';
@@ -20,9 +20,9 @@ export const Sort = {
   RATE: 'RATE'
 };
 
-export const geteMovie = (movie) => ({
-  type: GET_MOVIES,
-  movie
+export const setMovies = (movies) => ({
+  type: SET_MOVIES,
+  movies
 });
 
 export const createMovie = (movie) => ({

@@ -5,7 +5,6 @@ import * as PropTypes from "prop-types";
 
 const Film = (item) => {
     const [film] = React.useState(item.item);
-    console.log(film.overview)
   return (
       <div className='film'>
         <div className='home'>

@@ -1,5 +1,14 @@
-import { combineReducers } from 'redux'
-import {CREATE_MOVIE, DELETE_MOVIE, EDIT_MOVIE, Filter, FILTER_MOVIES, Sort, SORT_MOVIES, UPDATE_MOVIE} from './actions'
+import {combineReducers} from 'redux'
+import {
+  CREATE_MOVIE,
+  DELETE_MOVIE,
+  EDIT_MOVIE,
+  Filter,
+  FILTER_MOVIES,
+  Sort,
+  SORT_MOVIES,
+  UPDATE_MOVIE
+} from './actions'
 
 function filterMovies(state = Filter.ALL, action) {
   switch (action.type) {
@@ -32,7 +41,7 @@ function movies(state = [], action) {
       return state.filter(movies => movie.id !== action.payload);
     case UPDATE_MOVIE:
       return state.map((item) => {
-        if(item.id === action.payload.id) {
+        if (item.id === action.payload.id) {
           return {
             ...item,
             poster_path: action.payload.poster_path,
@@ -53,10 +62,22 @@ function movies(state = [], action) {
   }
 }
 
+function setMovies(state = [], action) {
+  if (action.type === "SET_MOVIES") {
+    return [
+      state,
+      {
+        ...action
+      }
+    ];
+  } else return state
+}
+
 const movieApp = combineReducers({
   filterMovies,
   sortMovies,
+  setMovies,
   movies
-})
+});
 
 export default movieApp
