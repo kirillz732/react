@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 
 const CreateForm = (props) => {
   const classes = useStyles();
+  const { isAddMovie } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -65,6 +66,7 @@ const CreateForm = (props) => {
             id="name"
             label="TITLE"
             fullWidth
+            disabled={isAddMovie}
           />
           <TextField
             className='calendar'

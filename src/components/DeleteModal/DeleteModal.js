@@ -24,13 +24,13 @@ const DeleteModal = () => {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = React.useCallback(() => {
     setOpen(true);
-  };
+  }, [setOpen]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = React.useCallback(() => {
+    setOpen(falsew);
+  }, [setOpen]);
 
   return (
     <div>

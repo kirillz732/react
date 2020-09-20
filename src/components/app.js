@@ -1,41 +1,59 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 import {BrowserRouter} from "react-router-dom";
 import MenuPanel from "./panel/MenuPanel";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default class App extends Component {
-  state = {
-    items: []
-  };
+const callToApi = () =>{
+  const [items, setData] = React.useState(undefined);
 
-  componentDidMount() {
+  React.useEffect(() => {
+
     fetch("https://reactjs-cdp.herokuapp.com/movies")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({items: result.data});
+          setData(result.data);
         },
         (error) => {
-          this.setState({
+          setData({
             error
           });
         }
-      )
-  }
+      );
+  }, []);
 
-  render() {
+  return [items];
+};
+
+const spinnerStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%'
+};
+
+const App = () => {
+   const [items] = callToApi();
+   const [movie, setMovie] = React.useState(undefined);
+
+  if (items) {
     return (
       <BrowserRouter forceRefresh={true}>
         <div>
-          <Header itemsLength={this.state.items.length}/>
+          <Header itemsLength={items.length} movie={movie} />
           <MenuPanel/>
-          <Body items={this.state.items}/>
+          <Body onMovieClick={(selectedMovie) => setMovie(selectedMovie)}  items={items}/>
           <Footer/>
         </div>
       </BrowserRouter>
     );
+  } else {
+    return <CircularProgress style={spinnerStyle}/>
   }
+
 };
+
+export default App;
