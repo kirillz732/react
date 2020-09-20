@@ -86,10 +86,10 @@ const CreateForm = (props) => {
             <Select
               labelId="select"
             >
-              <MenuItem>Documentary</MenuItem>
-              <MenuItem>Comedy</MenuItem>
-              <MenuItem>Horror</MenuItem>
-              <MenuItem>Crime</MenuItem>
+              <MenuItem value={'Documentary'}>Documentary</MenuItem>
+              <MenuItem value={'Comedy'}>Comedy</MenuItem>
+              <MenuItem value={'Horror'}>Horror</MenuItem>
+              <MenuItem value={'Crime'}>Crime</MenuItem>
             </Select>
           </FormControl>
           <TextField
