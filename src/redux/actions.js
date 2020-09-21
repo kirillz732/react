@@ -5,6 +5,7 @@ export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 export const SORT_MOVIES = 'SORT_MOVIES';
 export const FILTER_MOVIES = 'FILTER_MOVIES';
+export const GET_MOVIE = 'GET_MOVIE';
 
 export const Filter = {
   ALL: 'ALL',
@@ -40,10 +41,23 @@ export const editeMovie = (movie) => ({
   movie
 });
 
-export const deleteeMovie = (movie) => ({
-  type: DELETE_MOVIE,
-  movie
-});
+export const deleteMovie = () => ({
+  type: DELETE_MOVIE
+})
+
+export const deleteMovieApi = (id) => (dispatch) => {
+  fetch(`http://localhost:4000/movies/${id}`, {method: 'DELETE'})
+    .then(res => res.json())
+    .then(
+      (result) => {
+        dispatch(editeMovie(result));
+      },
+      (error) => {
+        console.log(error)
+      }
+    ).then(deleteMovie)
+    .then(getMovieApi());
+};
 
 export const sortMovie = (sort) => ({
   type: SORT_MOVIES,
@@ -54,4 +68,32 @@ export const filtereMovie = (filter) => ({
   type: FILTER_MOVIES,
   filter
 });
+
+export const getMovie = (id) =>
+  (dispatch) => {
+    fetch(`http://localhost:4000/movies/${id}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          dispatch(editeMovie(result));
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
+  };
+
+export const getMovieApi = () =>
+  (dispatch) => {
+    fetch(`http://localhost:4000/movies/`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          dispatch(setMovies(result.data));
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
+  };
 

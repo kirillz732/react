@@ -4,41 +4,28 @@ import {
   DELETE_MOVIE,
   EDIT_MOVIE,
   Filter,
-  FILTER_MOVIES,
+  FILTER_MOVIES, SET_MOVIES,
   Sort,
   SORT_MOVIES,
   UPDATE_MOVIE
 } from './actions'
 
-function filterMovies(state = Filter.ALL, action) {
+function moviesAPI(state = [], action) {
   switch (action.type) {
-    case FILTER_MOVIES:
-      return action.filter;
-    default:
-      return state
-  }
-}
-
-function sortMovies(state = Sort.NAME, action) {
-  switch (action.type) {
+    case SET_MOVIES:
+      return {
+        ...state,
+        movies: action.movies
+      };
     case SORT_MOVIES:
       return action.filter;
-    default:
-      return state
-  }
-}
-
-function movies(state = [], action) {
-  switch (action.type) {
+    case FILTER_MOVIES:
+      return action.filter;
     case CREATE_MOVIE:
-      return [
+      return {
         ...state,
-        {
-          movie: action.payload,
-        }
-      ];
-    case DELETE_MOVIE:
-      return state.filter(movies => movie.id !== action.payload);
+        movie: action.payload,
+      };
     case UPDATE_MOVIE:
       return state.map((item) => {
         if (item.id === action.payload.id) {
@@ -55,29 +42,26 @@ function movies(state = [], action) {
         }
         return item;
       });
-    case EDIT_MOVIE:
-      return state.filter(movies => movie.id === action.payload);
     default:
       return state
   }
 }
 
-function setMovies(state = [], action) {
-  if (action.type === "SET_MOVIES") {
-    return [
-      state,
-      {
-        ...action
-      }
-    ];
-  } else return state
+function getMovie(state = [], action) {
+  switch (action.type) {
+    case EDIT_MOVIE:
+      return {
+        ...state,
+        movie: action.movie
+      };
+    default:
+      return state
+  }
 }
 
 const movieApp = combineReducers({
-  filterMovies,
-  sortMovies,
-  setMovies,
-  movies
+  moviesAPI,
+  getMovie
 });
 
 export default movieApp

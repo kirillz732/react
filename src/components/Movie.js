@@ -8,11 +8,14 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import '../styles/style.scss';
 import CreateForm from "./CreateForm/CreateForm";
 import DeleteModal from "./DeleteModal/DeleteModal";
+import {getMovie} from "../redux/actions";
+import {useDispatch} from "react-redux";
 
 const Movie = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [hover, setHover] = React.useState(false);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
 
   const toggle = (isHover) => setHover(isHover);
 
@@ -29,7 +32,7 @@ const Movie = (props) => {
   };
 
   const setSelectedItem = (movie) => {
-    props.onItemClict(movie);
+    dispatch(getMovie(movie.id))
   };
 
   return (

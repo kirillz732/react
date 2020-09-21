@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from '@material-ui/core/styles'
+import {deleteMovieApi, getMovieApi} from "../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles({
   dialogTitle: {
@@ -21,6 +23,8 @@ const useStyles = makeStyles({
 
 const DeleteModal = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const movie = useSelector(state => state.getMovie.movie);
 
   const [open, setOpen] = React.useState(false);
 
@@ -29,8 +33,14 @@ const DeleteModal = () => {
   }, [setOpen]);
 
   const handleClose = React.useCallback(() => {
-    setOpen(falsew);
+    setOpen(false);
   }, [setOpen]);
+
+  const confirmDelete = () => {
+    dispatch(deleteMovieApi(movie.id));
+    dispatch(getMovieApi());
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -64,7 +74,7 @@ const DeleteModal = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant="contained" color="secondary">
+          <Button onClick={confirmDelete} variant="contained" color="secondary">
             Confirm
           </Button>
 

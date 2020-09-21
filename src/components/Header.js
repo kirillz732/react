@@ -6,12 +6,14 @@ import Film from "./Film";
 import {BrowserRouter, Route, Switch as RouterSwitch} from "react-router-dom";
 import NoFilms from "./NoFilms";
 import CreateForm from "./CreateForm/CreateForm";
+import {useSelector} from "react-redux";
 
 
-const Header = (props) => {
+const Header = () => {
+  const movie = useSelector(state => state.getMovie.movie);
 
-  const SelectedFilm = (props) => {
-    const movie = props.movie;
+  const SelectedFilm = () => {
+
     if (movie) {
       return <Film item={movie}/>
     } else {
@@ -26,7 +28,7 @@ const Header = (props) => {
           ReactJS mentoring
           <CreateForm open={true} isAddMovie={true}/>
         </div>
-        <SelectedFilm movie={props.movie}/>
+        <SelectedFilm />
         {/*<RouterSwitch >*/}
         {/*  <Route path="/" component={Search}/>*/}
         {/*  /!*<Route path='/film/:id' component={Film}/>*!/*/}

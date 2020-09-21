@@ -5,33 +5,9 @@ import Body from './Body';
 import Footer from './Footer';
 import {BrowserRouter} from "react-router-dom";
 import MenuPanel from "./panel/MenuPanel";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import {Provider} from "react-redux";
-import movieApp from "../redux/reducer";
-import {createStore} from "redux";
-import {setMovies} from "../redux/actions";
-
-const callToApi = () => {
-  const [items, setData] = React.useState(undefined);
-
-  React.useEffect(() => {
-
-    fetch("https://reactjs-cdp.herokuapp.com/movies")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setData(result.data);
-        },
-        (error) => {
-          setData({
-            error
-          });
-        }
-      );
-  }, []);
-
-  return [items];
-};
+import {useDispatch, useSelector} from "react-redux";
+import {getMovieApi} from "../redux/actions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const spinnerStyle = {
   position: 'absolute',
@@ -39,28 +15,25 @@ const spinnerStyle = {
   left: '50%'
 };
 
-
 const App = () => {
-  const store = createStore(movieApp);
-  const [items] = callToApi();
-  console.log(items)
-   store.dispatch(setMovies(items));
-  console.log(store.getState())
-  const [movie, setMovie] = React.useState(undefined);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+      dispatch(getMovieApi())
+    }, []
+  );
+  const items = useSelector(state => state.moviesAPI.movies);
 
   if (items) {
-    return (
+  return (
       <BrowserRouter forceRefresh={true}>
-        <Provider store={store}>
-          <div>
-            <Header itemsLength={items.length} movie={movie}/>
-            <MenuPanel/>
-            <Body onMovieClick={(selectedMovie) => setMovie(selectedMovie)} items={items}/>
-            <Footer/>
-          </div>
-        </Provider>
+        <div>
+          <Header itemsLength={items.length}/>
+          <MenuPanel/>
+          <Body/>
+          <Footer/>
+        </div>
       </BrowserRouter>
-    );
+  );
   } else {
     return <CircularProgress style={spinnerStyle}/>
   }
