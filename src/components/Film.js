@@ -15,7 +15,7 @@ const Film = (item) => {
           <div className='title-id'>
             {film.title}
             <div className='score'>
-              {film.vote_count}
+              {film.vote_average}
             </div>
           </div>
           <div className='tagline'>{film.tagline}</div>
@@ -32,7 +32,7 @@ Film.propTypes = {
   poster_path: PropTypes.string,
   title: PropTypes.string,
   release_date: PropTypes.string,
-  vote_count: PropTypes.number,
+  vote_average: PropTypes.number,
   overview: PropTypes.string,
   genres: PropTypes.arrayOf(PropTypes.string),
   tagline: PropTypes.string

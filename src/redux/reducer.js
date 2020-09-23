@@ -18,9 +18,15 @@ function moviesAPI(state = [], action) {
         movies: action.movies
       };
     case SORT_MOVIES:
-      return action.filter;
+      const key = action.payload;
+      return {
+        movies: state.movies.sort((a, b) => a[key] > b[key] ? 1 : -1)
+  };
     case FILTER_MOVIES:
-      return action.filter;
+      const genre = action.payload;
+      return {
+        movies: state.movies.filter(item => item.genres[0] === genre)
+      };
     case CREATE_MOVIE:
       return {
         ...state,

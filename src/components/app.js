@@ -23,6 +23,7 @@ const App = () => {
   );
   const items = useSelector(state => state.moviesAPI.movies);
 
+
   if (items) {
   return (
       <BrowserRouter forceRefresh={true}>

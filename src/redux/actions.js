@@ -1,3 +1,5 @@
+import {useSelector} from "react-redux";
+
 export const SET_MOVIES = 'SET_MOVIES';
 export const CREATE_MOVIE = 'CREATE_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
@@ -61,12 +63,12 @@ export const deleteMovieApi = (id) => (dispatch) => {
 
 export const sortMovie = (sort) => ({
   type: SORT_MOVIES,
-  sort
+  payload: sort
 });
 
 export const filtereMovie = (filter) => ({
   type: FILTER_MOVIES,
-  filter
+  payload: filter
 });
 
 export const getMovie = (id) =>

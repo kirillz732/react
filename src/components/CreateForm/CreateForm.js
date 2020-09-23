@@ -30,9 +30,8 @@ const CreateForm = (props) => {
   const { isAddMovie } = props;
 
   const [open, setOpen] = React.useState(false);
-  const movie = useSelector(state => state.getMovie.movie);
-  const selectMovie = movie ? movie : {};
-  const [runtime, setRuntime] = React.useState('');
+  const movieApi = useSelector(state => state.getMovie.movie);
+  const selectMovie = movieApi ? movieApi : {};
 
   const title = props.isAddMovie ? 'Add movie' : 'Edit movie';
   const buttonName = props.isAddMovie ? '+ Add movie' : 'Edit movie';
@@ -46,15 +45,14 @@ const CreateForm = (props) => {
 
   const handleClickOpen = () => {
     setOpen(props.open);
-    if (movie) {
-      setGenre(movie.genres[0]);
-      setRuntime(movie.runtime)
+    if (movieApi) {
+      setGenre(movieApi.genres[0]);
     }
   };
 
   const handleClose = () => {
     setOpen(false);
-    console.log(movie)
+    console.log(selectMovie)
   };
 
   return (
@@ -126,7 +124,7 @@ const CreateForm = (props) => {
             id="name"
             label="RUNTIME"
             fullWidth
-            defaultValue={runtime}
+            defaultValue={selectMovie.runtime}
           />
         </DialogContent>
         <DialogActions>
