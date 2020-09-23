@@ -32,6 +32,11 @@ function moviesAPI(state = [], action) {
         ...state,
         movie: action.payload,
       };
+    case DELETE_MOVIE:
+      const id = action.payload;
+      return {
+        movies: state.movies.filter(item => item.id !== id),
+      };
     case UPDATE_MOVIE:
       return state.map((item) => {
         if (item.id === action.payload.id) {

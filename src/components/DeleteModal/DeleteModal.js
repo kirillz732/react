@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from '@material-ui/core/styles'
-import {deleteMovieApi, getMovieApi} from "../../redux/actions";
+import {deleteMovie, deleteMovieApi } from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles({
@@ -38,7 +38,7 @@ const DeleteModal = () => {
 
   const confirmDelete = () => {
     dispatch(deleteMovieApi(movie.id));
-    dispatch(getMovieApi());
+    dispatch(deleteMovie(movie.id));
     setOpen(false);
   };
 

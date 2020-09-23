@@ -43,9 +43,10 @@ export const editeMovie = (movie) => ({
   movie
 });
 
-export const deleteMovie = () => ({
-  type: DELETE_MOVIE
-})
+export const deleteMovie = (id) => ({
+  type: DELETE_MOVIE,
+  payload: id
+});
 
 export const deleteMovieApi = (id) => (dispatch) => {
   fetch(`http://localhost:4000/movies/${id}`, {method: 'DELETE'})
@@ -57,8 +58,7 @@ export const deleteMovieApi = (id) => (dispatch) => {
       (error) => {
         console.log(error)
       }
-    ).then(deleteMovie)
-    .then(getMovieApi());
+    )
 };
 
 export const sortMovie = (sort) => ({
