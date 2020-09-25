@@ -11,7 +11,6 @@ const Body = () => {
 
   const movieArr = useSelector(state => state.moviesAPI.movies);
 
-  if (movieArr) {
     return (
       <div className='container'>
         <ErrorBoundary>
@@ -22,7 +21,6 @@ const Body = () => {
         </ErrorBoundary>
       </div>
     )
-  }
 };
 
 export default Body;

@@ -20,11 +20,13 @@ function moviesAPI(state = [], action) {
     case SORT_MOVIES:
       const key = action.payload;
       return {
+        ...state,
         movies: state.movies.sort((a, b) => a[key] > b[key] ? 1 : -1)
   };
     case FILTER_MOVIES:
       const genre = action.payload;
       return {
+        ...state,
         movies: state.movies.filter(item => item.genres[0] === genre)
       };
     case CREATE_MOVIE:
@@ -35,24 +37,28 @@ function moviesAPI(state = [], action) {
     case DELETE_MOVIE:
       const id = action.payload;
       return {
+        ...state,
         movies: state.movies.filter(item => item.id !== id),
       };
     case UPDATE_MOVIE:
-      return state.map((item) => {
-        if (item.id === action.payload.id) {
-          return {
-            ...item,
-            poster_path: action.payload.poster_path,
-            title: action.payload.title,
-            release_date: action.payload.release_date,
-            vote_count: action.payload.vote_count,
-            overview: action.payload.overview,
-            genres: action.payload.genres,
-            tagline: action.payload.tagline
+      return {
+        ...state,
+        movie: state.map((item) => {
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              poster_path: action.payload.poster_path,
+              title: action.payload.title,
+              release_date: action.payload.release_date,
+              vote_count: action.payload.vote_count,
+              overview: action.payload.overview,
+              genres: action.payload.genres,
+              tagline: action.payload.tagline
+            }
           }
-        }
-        return item;
-      });
+          return item;
+        })
+      };
     default:
       return state
   }
