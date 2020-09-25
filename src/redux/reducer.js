@@ -10,7 +10,9 @@ import {
   UPDATE_MOVIE
 } from './actions'
 
-function moviesAPI(state = [], action) {
+function moviesAPI(state = {
+  movies: []
+}, action) {
   switch (action.type) {
     case SET_MOVIES:
       return {
@@ -19,9 +21,10 @@ function moviesAPI(state = [], action) {
       };
     case SORT_MOVIES:
       const key = action.payload;
+      const sorted = state.movies.sort((a, b) => a[key] > b[key] ? 1 : -1);
       return {
         ...state,
-        movies: state.movies.sort((a, b) => a[key] > b[key] ? 1 : -1)
+        movies: [...sorted]
   };
     case FILTER_MOVIES:
       const genre = action.payload;

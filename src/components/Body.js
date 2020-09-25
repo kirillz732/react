@@ -6,6 +6,13 @@ import {NavLink} from "react-router-dom";
 import '../styles/style.scss';
 import {useSelector} from "react-redux";
 import Movie from "./Movie";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+const spinnerStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%'
+};
 
 const Body = () => {
 
@@ -15,9 +22,10 @@ const Body = () => {
       <div className='container'>
         <ErrorBoundary>
           <div className='movies-item'>{movieArr.length} movies found</div>
-          {movieArr.map((item) =>
+          {movieArr.length ? movieArr.map((item) =>
             <Movie key={item.id} movieItem={item}/>
-          )}
+          ) : <CircularProgress style={spinnerStyle}/>
+          }
         </ErrorBoundary>
       </div>
     )

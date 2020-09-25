@@ -7,13 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import MenuPanel from "./panel/MenuPanel";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovieApi} from "../redux/actions";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-const spinnerStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%'
-};
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,8 +16,6 @@ const App = () => {
   );
   const items = useSelector(state => state.moviesAPI.movies);
 
-
-  if (items) {
   return (
       <BrowserRouter forceRefresh={true}>
         <div>
@@ -35,10 +26,6 @@ const App = () => {
         </div>
       </BrowserRouter>
   );
-  } else {
-    return <CircularProgress style={spinnerStyle}/>
-  }
-
 };
 
 export default App;
