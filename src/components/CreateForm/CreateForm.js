@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import CloseIcon from '@material-ui/icons/Close';
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from '@material-ui/core/styles'
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles({
   dialogTitle: {
@@ -29,16 +30,29 @@ const CreateForm = (props) => {
   const { isAddMovie } = props;
 
   const [open, setOpen] = React.useState(false);
+  const movieApi = useSelector(state => state.getMovie.movie);
+  const selectMovie = movieApi ? movieApi : {};
 
   const title = props.isAddMovie ? 'Add movie' : 'Edit movie';
   const buttonName = props.isAddMovie ? '+ Add movie' : 'Edit movie';
 
+  const [genre, setGenre] = React.useState('');
+
+
+  const handleChange = (event) => {
+    setGenre(event.target.value);
+  };
+
   const handleClickOpen = () => {
     setOpen(props.open);
+    if (movieApi) {
+      setGenre(movieApi.genres[0]);
+    }
   };
 
   const handleClose = () => {
     setOpen(false);
+    console.log(selectMovie)
   };
 
   return (
@@ -66,30 +80,36 @@ const CreateForm = (props) => {
             id="name"
             label="TITLE"
             fullWidth
-            disabled={isAddMovie}
+            defaultValue={selectMovie.title}
+            disabled={!isAddMovie}
           />
           <TextField
             className='calendar'
             id="date"
-            defaultValue="2017-05-24"
             label="RELEASE DATE"
             type="date"
+            defaultValue={selectMovie.release_date}
           />
           <TextField
             margin="dense"
             id="name"
             label="MOVIE URL"
             fullWidth
+            defaultValue={selectMovie.poster_path}
           />
           <FormControl className='select-genre'>
             <InputLabel id="select">GENRE</InputLabel>
             <Select
               labelId="select"
+              value={genre}
+              onChange={handleChange}
             >
-              <MenuItem>Documentary</MenuItem>
-              <MenuItem>Comedy</MenuItem>
-              <MenuItem>Horror</MenuItem>
-              <MenuItem>Crime</MenuItem>
+              <MenuItem value={'Documentary'}>Documentary</MenuItem>
+              <MenuItem value={'Comedy'}>Comedy</MenuItem>
+              <MenuItem value={'Horror'}>Horror</MenuItem>
+              <MenuItem value={'Crime'}>Crime</MenuItem>
+              <MenuItem value={'Action'}>Action</MenuItem>
+              <MenuItem value={'Drama'}>Drama</MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -97,12 +117,14 @@ const CreateForm = (props) => {
             id="name"
             label="OVERVIEW"
             fullWidth
+            defaultValue={selectMovie.overview}
           />
           <TextField
             margin="dense"
             id="name"
             label="RUNTIME"
             fullWidth
+            defaultValue={selectMovie.runtime}
           />
         </DialogContent>
         <DialogActions>

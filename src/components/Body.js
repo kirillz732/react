@@ -1,24 +1,31 @@
 import React from 'react';
 
 import ErrorBoundary from './ErrorBoundary';
-import Movie from "./Movie";
 
 import {NavLink} from "react-router-dom";
 import '../styles/style.scss';
+import {useSelector} from "react-redux";
+import Movie from "./Movie";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Body = (props) => {
+const spinnerStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%'
+};
 
-  const setSelectedMovie = (movie) => {
-   props.onMovieClick(movie);
-  };
+const Body = () => {
+
+  const movieArr = useSelector(state => state.moviesAPI.movies);
 
     return (
       <div className='container'>
         <ErrorBoundary>
-          <div className='movies-item'>{props.items.length} movies found </div>
-          {props.items.map( (item) =>
-              <Movie key={item.id} onItemClict={(selectedMovie) => setSelectedMovie(selectedMovie)} movieItem={item}/>
-          )}
+          <div className='movies-item'>{movieArr.length} movies found</div>
+          {movieArr.length ? movieArr.map((item) =>
+            <Movie key={item.id} movieItem={item}/>
+          ) : <CircularProgress style={spinnerStyle}/>
+          }
         </ErrorBoundary>
       </div>
     )
