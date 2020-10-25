@@ -2,9 +2,12 @@ import React from 'react';
 
 import '../styles/style.scss';
 import * as PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
-const Film = (item) => {
+const Film = () => {
+  const item = useSelector(state => state.getMovie.movie);
     const [film] = React.useState(item.item);
+    console.log(item)
   return (
       <div className='film'>
         <div className='home'>

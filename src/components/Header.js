@@ -10,12 +10,13 @@ import {useSelector} from "react-redux";
 
 
 const Header = () => {
-  const movie = useSelector(state => state.getMovie.movie);
+
 
   const SelectedFilm = () => {
 
     if (movie) {
       return <Film item={movie}/>
+      console.log(movie)
     } else {
       return <Search/>;
     }
@@ -28,13 +29,13 @@ const Header = () => {
           ReactJS mentoring
           <CreateForm open={true} isAddMovie={true}/>
         </div>
-        <SelectedFilm />
-        {/*<RouterSwitch >*/}
-        {/*  <Route path="/" component={Search}/>*/}
-        {/*  /!*<Route path='/film/:id' component={Film}/>*!/*/}
+        {/*<SelectedFilm />*/}
+        <RouterSwitch >
+          <Route exact path="/" component={Search}/>
+          <Route path='/film/:id' component={Film}/>
 
-        {/*  <Route component={NoFilms}/>*/}
-        {/*</RouterSwitch>*/}
+          <Route component={NoFilms}/>
+        </RouterSwitch>
       </div>
     </BrowserRouter>
   )

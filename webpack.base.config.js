@@ -7,7 +7,7 @@ module.exports = {
     app: "./src/index.js",
   },
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.resolve(__dirname, "/dist"),
     filename: "index-bundle.js",
     publicPath: '/'
   },
@@ -39,6 +39,9 @@ module.exports = {
         }
       ]
     }]
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new MiniCssExtractPlugin({

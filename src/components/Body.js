@@ -23,7 +23,9 @@ const Body = () => {
         <ErrorBoundary>
           <div className='movies-item'>{movieArr.length} movies found</div>
           {movieArr.length ? movieArr.map((item) =>
-            <Movie key={item.id} movieItem={item}/>
+            <NavLink to={`/film/${item.id}`} key={item.id}>
+              <Movie key={item.id} movieItem={item}/>
+            </NavLink>
           ) : <CircularProgress style={spinnerStyle}/>
           }
         </ErrorBoundary>
