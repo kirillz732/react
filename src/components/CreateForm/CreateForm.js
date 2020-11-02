@@ -72,17 +72,6 @@ const CreateForm = (props) => {
     runtime: selectMovie.runtime
   };
 
-  const onSubmit = (values) => {
-    onClose({
-      title: values.title,
-      release_date: values.releaseDate,
-      poster_path: values.posterPath,
-      genres: values.genres,
-      overview: values.overview,
-      runtime: values.runtime
-    });
-  }
-
   const handleChange = (event) => {
     setGenre(event.target.value);
   };
@@ -118,7 +107,7 @@ const CreateForm = (props) => {
           <Formik
             initialValues={ initialValues }
             validationSchema={ movieValidationSchema }
-            onSubmit={onSubmit}>
+            onSubmit={handleClose}>
           <Input
             classes={{
               root: classes.textField
