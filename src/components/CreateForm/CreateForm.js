@@ -48,7 +48,15 @@ const CreateForm = (props) => {
 
   const [open, setOpen] = React.useState(false);
   const movieApi = useSelector(state => state.getMovie.movie);
-  const selectMovie = movieApi ? movieApi : {};
+  const defaultMovie = {
+    title: ' ',
+    releaseDate: ' ',
+    posterPath: ' ',
+    genres: ' ',
+    overview: ' ',
+    runtime: ' '
+  };
+  const selectMovie = Object.keys(movieApi).length !== 0 ? movieApi : defaultMovie;
 
   const title = props.isAddMovie ? 'Add movie' : 'Edit movie';
   const buttonName = props.isAddMovie ? '+ Add movie' : 'Edit movie';
