@@ -1,13 +1,23 @@
 import React from 'react';
 
+import { useHistory } from 'react-router-dom';
 import '../styles/style.scss';
 import * as PropTypes from "prop-types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getMovie, getMovieApi} from "../redux/actions";
+
 
 const Film = () => {
-  const item = useSelector(state => state.getMovie.movie);
-    const [film] = React.useState(item.item);
-    console.log(item)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  let id = history.location.pathname.slice(6);
+  React.useEffect(() => {
+      dispatch(getMovie(+id))
+    }, []
+  );
+    //dispatch(getMovie(123))
+    const film = useSelector(state => state.getMovie.movie);
+
   return (
       <div className='film'>
         <div className='home'>
