@@ -14,7 +14,7 @@ import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from '@material-ui/core/styles'
 import {useSelector} from "react-redux";
 import Input from "@material-ui/core/Input";
-import {Formik} from "formik";
+import {Formik, Form} from "formik";
 import * as Yup from 'yup';
 
 const useStyles = makeStyles({
@@ -108,6 +108,7 @@ const CreateForm = (props) => {
             initialValues={ initialValues }
             validationSchema={ movieValidationSchema }
             onSubmit={handleClose}>
+          <Form>
           <Input
             classes={{
               root: classes.textField
@@ -168,6 +169,7 @@ const CreateForm = (props) => {
             fullWidth
             defaultValue={selectMovie.runtime}
           />
+          </Form>
           </Formik>
         </DialogContent>
         <DialogActions>
