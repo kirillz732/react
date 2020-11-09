@@ -67,7 +67,7 @@ function moviesAPI(state = {
   }
 }
 
-function getMovie(state = [], action) {
+function getMovie(state = {movie: {}}, action) {
   switch (action.type) {
     case EDIT_MOVIE:
       return {

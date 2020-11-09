@@ -2,7 +2,7 @@ import React from 'react';
 
 import ErrorBoundary from './ErrorBoundary';
 
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import '../styles/style.scss';
 import {useSelector} from "react-redux";
 import Movie from "./Movie";
@@ -23,7 +23,9 @@ const Body = () => {
         <ErrorBoundary>
           <div className='movies-item'>{movieArr.length} movies found</div>
           {movieArr.length ? movieArr.map((item) =>
-            <Movie key={item.id} movieItem={item}/>
+            <Link to={`/film/${item.id}`} key={item.id}>
+              <Movie key={item.id} movieItem={item}/>
+            </Link>
           ) : <CircularProgress style={spinnerStyle}/>
           }
         </ErrorBoundary>

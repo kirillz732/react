@@ -17,7 +17,7 @@ const App = () => {
   const items = useSelector(state => state.moviesAPI.movies);
 
   return (
-      <BrowserRouter forceRefresh={true}>
+      <BrowserRouter>
         <div>
           <Header itemsLength={items.length}/>
           <MenuPanel/>

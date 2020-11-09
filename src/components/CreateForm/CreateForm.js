@@ -13,6 +13,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from '@material-ui/core/styles'
 import {useSelector} from "react-redux";
+import Input from "@material-ui/core/Input";
+import {Formik, Form} from "formik";
+import * as Yup from 'yup';
 
 const useStyles = makeStyles({
   dialogTitle: {
@@ -24,6 +27,20 @@ const useStyles = makeStyles({
   }
 });
 
+const REQUIRED_ERROR_MESSAGE = 'Required';
+const RUNTIME_FORMAT_ERROR_MESSAGE = 'Runtime must be a number > 0';
+const GENRES_ERROR_MESSAGE = 'Select at least one genre to proceed';
+const VALID_URL_REGEXP = '(http(s?):)|([/|.])*.(?:jpg|gif|png)';
+const URL_ERROR_MESSAGE = 'Please enter a valid url or use default: https://lh3.googleusercontent.com/proxy/Hs6w0WSFk_0rKU9cqUeHIotG-ZWUuDo7EQzWhRq-jpgcdUXVyW-4Ocva5oHhd_6PF0EAaLlHGHsTw3zIN_wxdt4h758xURF_mu1HK2E'
+
+const movieValidationSchema = Yup.object({
+  title: Yup.string().required(REQUIRED_ERROR_MESSAGE),
+  posterPath: Yup.string().required(REQUIRED_ERROR_MESSAGE).matches(VALID_URL_REGEXP, URL_ERROR_MESSAGE),
+  genres: Yup.array().typeError(GENRES_ERROR_MESSAGE).min(1, GENRES_ERROR_MESSAGE),
+  overview: Yup.string().required(REQUIRED_ERROR_MESSAGE),
+  runtime: Yup.number().typeError(RUNTIME_FORMAT_ERROR_MESSAGE).min(0, RUNTIME_FORMAT_ERROR_MESSAGE).required(REQUIRED_ERROR_MESSAGE)
+});
+
 
 const CreateForm = (props) => {
   const classes = useStyles();
@@ -31,13 +48,29 @@ const CreateForm = (props) => {
 
   const [open, setOpen] = React.useState(false);
   const movieApi = useSelector(state => state.getMovie.movie);
-  const selectMovie = movieApi ? movieApi : {};
+  const defaultMovie = {
+    title: ' ',
+    releaseDate: ' ',
+    posterPath: ' ',
+    genres: ' ',
+    overview: ' ',
+    runtime: ' '
+  };
+  const selectMovie = Object.keys(movieApi).length !== 0 ? movieApi : defaultMovie;
 
   const title = props.isAddMovie ? 'Add movie' : 'Edit movie';
   const buttonName = props.isAddMovie ? '+ Add movie' : 'Edit movie';
 
   const [genre, setGenre] = React.useState('');
 
+  const initialValues = {
+    title: selectMovie.title,
+    releaseDate: selectMovie.release_date,
+    posterPath: selectMovie.poster_path,
+    genres: genre,
+    overview: selectMovie.overview,
+    runtime: selectMovie.runtime
+  };
 
   const handleChange = (event) => {
     setGenre(event.target.value);
@@ -52,7 +85,6 @@ const CreateForm = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-    console.log(selectMovie)
   };
 
   return (
@@ -72,27 +104,35 @@ const CreateForm = (props) => {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <TextField
+          <Formik
+            initialValues={ initialValues }
+            validationSchema={ movieValidationSchema }
+            onSubmit={handleClose}>
+          <Form>
+          <Input
             classes={{
               root: classes.textField
             }}
+            name="title"
             margin="dense"
-            id="name"
+            id="title"
             label="TITLE"
             fullWidth
             defaultValue={selectMovie.title}
             disabled={!isAddMovie}
           />
           <TextField
+            name="releaseDate"
             className='calendar'
-            id="date"
+            id="releaseDate"
             label="RELEASE DATE"
             type="date"
             defaultValue={selectMovie.release_date}
           />
           <TextField
+            name="posterPath"
             margin="dense"
-            id="name"
+            id="posterPath"
             label="MOVIE URL"
             fullWidth
             defaultValue={selectMovie.poster_path}
@@ -100,6 +140,7 @@ const CreateForm = (props) => {
           <FormControl className='select-genre'>
             <InputLabel id="select">GENRE</InputLabel>
             <Select
+              name="genres"
               labelId="select"
               value={genre}
               onChange={handleChange}
@@ -113,25 +154,29 @@ const CreateForm = (props) => {
             </Select>
           </FormControl>
           <TextField
+            name='overview'
             margin="dense"
-            id="name"
+            id="overview"
             label="OVERVIEW"
             fullWidth
             defaultValue={selectMovie.overview}
           />
           <TextField
+            name='runtime'
             margin="dense"
-            id="name"
+            id="runtime"
             label="RUNTIME"
             fullWidth
             defaultValue={selectMovie.runtime}
           />
+          </Form>
+          </Formik>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant="outlined" color="secondary">
             Reset
           </Button>
-          <Button onClick={handleClose} variant="contained" color="secondary">
+          <Button onClick={handleClose} variant="contained" type="submit" color="secondary">
             Submit
           </Button>
         </DialogActions>
