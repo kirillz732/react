@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux'
+import {getMovie} from './getMovie.reducer'
 import {
   CREATE_MOVIE,
   DELETE_MOVIE,
-  EDIT_MOVIE,
   Filter,
   FILTER_MOVIES, SET_MOVIES,
   Sort,
@@ -67,17 +67,6 @@ function moviesAPI(state = {
   }
 }
 
-function getMovie(state = {movie: {}}, action) {
-  switch (action.type) {
-    case EDIT_MOVIE:
-      return {
-        ...state,
-        movie: action.movie
-      };
-    default:
-      return state
-  }
-}
 
 const movieApp = combineReducers({
   moviesAPI,
