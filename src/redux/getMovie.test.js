@@ -9,10 +9,9 @@ describe('getMovie', () => {
       movie: undefined
     };
 
-    expect(reducer({}, action)).toEqual({
-      movie: undefined,
-      moviesApi: {
-        movies: []
+    expect(reducer({}, action)).toEqual(    {
+      moviesAPI: { movies: []},
+      getMovie: { movie: undefined
       }
   })
   })
